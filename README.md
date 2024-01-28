@@ -1,22 +1,26 @@
 # ancient-chat-llm 古语说
 
-## 演示
-
-## 前言
+## 介绍
 
 古语说 - 一个精通中国文化的大模型
 
+## 演示
+
+
 ## 知识库
 
-[x] 成语
-[x] 论语
-[x] 唐诗
-[x] 宋词
-[x] 楚辞
-[x] 四书五经
-[ ] 史记
-[ ] 宫廷制度
-[ ] 二十四节气
+- [x] 文言文翻译
+- [x] 成语
+- [x] 论语
+- [x] 唐诗
+- [x] 宋词
+- [x] 楚辞
+- [x] 四书五经
+- [x] 百家姓
+- [x] 弟子规
+- [ ] 史记
+- [ ] 宫廷制度
+- [ ] 二十四节气
 
 ## 数据集
 
@@ -30,7 +34,7 @@
 ```bash
 dataset/
 ├── Erya-dataset
-│   ├── dataset # 解压自 finetune.tgz 
+│   ├── dataset # 解压自 finetune.tgz
 │   └── stage_2 # 解压自 trans.tgz 
 └── chinese-poetry
     ├── 五代诗词
@@ -63,7 +67,7 @@ python gen_dataset.py --data=dataset --output=data.jsonl
 
 训练之前，需要在 xtuner 代码中 `xtuner/xtuner/utils/templates.py` 添加 `SYSTEM_TEMPLATE.chinese_old_saying` ：
 
-```python
+```diff
 SYSTEM_TEMPLATE = ConfigDict(
     moss_sft=('You are an AI assistant whose name is {bot_name}.\n'
               'Capabilities and tools that {bot_name} can possess.\n'
@@ -95,7 +99,7 @@ SYSTEM_TEMPLATE = ConfigDict(
 
 修改数据集路径，以及模型路径
 
-```python
+```diff
 # Model
 - pretrained_model_name_or_path = 'internlm/internlm2-7b'
 + pretrained_model_name_or_path = '/path/to/internlm/internlm2-7b' # 这步可选，如果事先下载好了模型可以直接使用绝对路径
@@ -118,6 +122,17 @@ xtuner train finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_d
 注意：如果显存不够了，调小一点 `batch_size` 和 `max_length`，反之还剩很多，调大这两个值
 
 ## 部署
+
+### LMDeploy 
+
+1. 拉取模型
+2. 量化
+
+### pytorch 原生部署
+
+### cli 方式进行部署
+
+
 
 ## 后记
 
