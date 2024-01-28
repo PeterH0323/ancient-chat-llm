@@ -1,8 +1,32 @@
-# ancient-chat-llm 古语说
+# ancient-chat-llm 古语说-一个精通中国文化的大模型
 
-## 介绍
+<!-- PROJECT SHIELDS -->
 
-古语说 - 一个精通中国文化的大模型
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![Stargazers][stars-shield]][stars-url]
+
+<br />
+<!-- PROJECT LOGO -->
+
+<p align="center">
+  <a href="https://github.com/PeterH0323/ancient-chat-llm/">
+    <img src="assets/log.png" alt="Logo" width="30%">
+  </a>
+
+<h3 align="center">ancient-chat-llm</h3>
+  <p align="center">
+    <br />
+    <a href="https://github.com/PeterH0323/ancient-chat-llm/tree/main/demo">查看Demo</a>
+    ·
+    <a href="https://github.com/PeterH0323/ancient-chat-llm/issues">报告Bug & 提出新特性</a>
+  </p>
+</p>
+
+
+**ancient-chat-llm 古语说** 是一个能够支持解答用户 **关于中国文化的问题，包括但不限于唐诗、宋词、论语等古籍，还可以让其翻译文言文等** 的大模型，由 [InternLM2](https://github.com/InternLM/InternLM) 指令微调而来，欢迎大家star~⭐⭐
 
 ## 演示
 
