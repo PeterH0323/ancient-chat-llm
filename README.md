@@ -1,12 +1,13 @@
 # ancient-chat-llm 古语说-一个精通中国文化的大模型
 
 <!-- PROJECT SHIELDS -->
-
+<!-- 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![Stargazers][stars-shield]][stars-url]
+-->
 
 <br />
 <!-- PROJECT LOGO -->
