@@ -229,9 +229,12 @@ xtuner chat ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_m
 
 ### LMDeploy 
 
+TODO 
+
 ## TODO
 
 - [ ] 使用其它大模型进行数据集扩充
+- [ ] 量化模型
 
 ## 后记
 
