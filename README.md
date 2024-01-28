@@ -51,10 +51,11 @@
 - [ ] 史记
 - [ ] 宫廷制度
 - [ ] 二十四节气
+- [ ] ...
 
 ## 数据集
 
-目前使用到的开源数据集有以下几个：
+目前使用到的开源数据集有以下几个，其余数据集需要使用爬虫等技术进行爬取，暂时不开源：
 
 - 文言文：https://huggingface.co/datasets/RUCAIBox/Erya-dataset/tree/main
 - 古诗：https://github.com/chinese-poetry/chinese-poetry
@@ -88,7 +89,7 @@ dataset/
 
 ```bash
 cd dataset
-python gen_dataset.py --data=dataset --output=data.jsonl
+python gen_dataset.py --data-root=./dataset --output=data.jsonl
 ```
 
 ## 搭建环境
