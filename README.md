@@ -45,17 +45,46 @@
 这就是我们做这个模型的初衷，我们想将中华文化教给大模型，让其能够尽可能掌握中华文化，做到文化输出。
 
 
+<!-- 演示 Start -->
 
+<!-- 演示 END -->
 
 ## 模型
 
-### MdeolScope
+### 从 MdeolScope 导入
 
 [HinGwenWoong/ancient-chat-7b](https://modelscope.cn/models/HinGwenWoong/ancient-chat-7b)
 
-### huggingface 
+```python
+import torch
+from modelscope import snapshot_download, AutoTokenizer, AutoModelForCausalLM
+model_dir = snapshot_download('HinGwenWoong/ancient-chat-7b')
+tokenizer = AutoTokenizer.from_pretrained(model_dir, device_map="auto", trust_remote_code=True)
+# Set `torch_dtype=torch.float16` to load model in float16, otherwise it will be loaded as float32 and might cause OOM Error.
+model = AutoModelForCausalLM.from_pretrained(model_dir, device_map="auto", trust_remote_code=True, torch_dtype=torch.float16)
+model = model.eval()
+response, history = model.chat(tokenizer, "你好", history=[])
+print(response)
+response, history = model.chat(tokenizer, "李白简介", history=history)
+print(response)
+```
+
+### 从 huggingface 导入
 
 [hingwen/ancient-chat-7b](https://huggingface.co/hingwen/ancient-chat-7b)
+
+```python
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+tokenizer = AutoTokenizer.from_pretrained("hingwen/ancient-chat-7b", trust_remote_code=True)
+# Set `torch_dtype=torch.float16` to load model in float16, otherwise it will be loaded as float32 and might cause OOM Error.
+model = AutoModelForCausalLM.from_pretrained("hingwen/ancient-chat-7b", device_map="auto", trust_remote_code=True, torch_dtype=torch.float16)
+model = model.eval()
+response, history = model.chat(tokenizer, "你好", history=[])
+print(response)
+response, history = model.chat(tokenizer, "李白简介", history=history)
+print(response)
+```
 
 ## 知识库
 
@@ -139,6 +168,10 @@ python gen_dataset.py --data-root=./dataset --output=data.jsonl
 ## 搭建环境
 
 本项目使用 [xtuner](https://github.com/InternLM/xtuner) 训练，在 [internlm2-chat-7b](https://huggingface.co/internlm/internlm2-chat-7b) 上进行微调
+
+```bash
+git clone https://github.com/PeterH0323/ancient-chat-llm.git
+```
 
 训练之前，需要在 `xtuner` 代码中 `xtuner/xtuner/utils/templates.py` 添加 `SYSTEM_TEMPLATE.chinese_old_saying` ：
 
