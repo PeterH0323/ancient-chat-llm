@@ -43,7 +43,7 @@ warmup_ratio = 0.03
 
 # Evaluate the generation performance during the training
 evaluation_freq = 200
-SYSTEM = SYSTEM_TEMPLATE.chinese_old_saying
+SYSTEM = SYSTEM_TEMPLATE.ancient_chat
 evaluation_inputs = [
     '出言不逊出自哪里', 
     '帮我用成语志在四方讲一个故事', 

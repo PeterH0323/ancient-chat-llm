@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://github.com/PeterH0323/ancient-chat-llm/">
-    <img src="assets/log.png" alt="Logo" width="30%">
+    <img src="assets/logo.png" alt="Logo" width="30%">
   </a>
 
 <h3 align="center">ancient-chat-llm</h3>
@@ -28,6 +28,11 @@
 
 
 **ancient-chat-llm 古语说** 是一个能够支持解答用户 **关于中国文化的问题，包括但不限于唐诗、宋词、论语等古籍，还可以让其翻译文言文等** 的大模型，由 [InternLM2](https://github.com/InternLM/InternLM) 指令微调而来，欢迎大家star~⭐⭐
+
+## NEWS
+
+- [2024.2] 新增诗词、古籍等知识，发布第二版本模型
+- [2024.1] 成语数据集微调模型
 
 ## 演示
 
@@ -116,7 +121,7 @@ SYSTEM_TEMPLATE = ConfigDict(
     medical='如果你是一名医生，请根据患者的描述回答医学问题。\n',
     sql=('If you are an expert in SQL, please generate a good SQL Query '
          'for Question based on the CREATE TABLE statement.\n'),
-+    chinese_old_saying="你是一位专业的中文教师。你总能解答用户关于中文的相关知识。\n",
++    ancient_chat="你是一位专业的中文教师。你总能解答用户关于中文的相关知识。\n",
 )
 ```
 
@@ -148,16 +153,37 @@ xtuner train finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_d
 
 ## 部署
 
+### cli 部署 Demo
+
+1. 将 pth 转为 hf 
+
+
+```bash
+xtuner convert pth_to_hf ./finetune_configs/internlm_chat_7b/internlm_chat_7b_qlora_custom_data_e3_finetune.py ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3.pth ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_hf
+```
+
+2. 将微调后的模型和源模型 merge 生成新的模型
+
+```bash
+xtuner convert merge /path/to/internlm-chat-7b ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_hf ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge
+```
+
+3. 启动 web demo
+
+
+```bash
+# web demo
+
+
+# 也可以直接使用命令行 cli 的方式进行启动
+xtuner chat ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge --prompt-template internlm2_chat --system-template ancient_chat
+```
+
 ### LMDeploy 
 
 1. 拉取模型
+
 2. 量化
-
-### pytorch 原生部署
-
-### cli 方式进行部署
-
-
 
 ## 后记
 
