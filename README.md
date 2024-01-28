@@ -27,13 +27,13 @@
 </p>
 
 
-**ancient-chat-llm 古语说** 是一个能够支持解答用户 **关于中国文化的问题，包括但不限于唐诗、宋词、论语等古籍，还可以让其翻译文言文等** 的大模型，由 [InternLM2](https://github.com/InternLM/InternLM) 指令微调而来。
+**ancient-chat-llm 古语说** 是一个能够支持解答用户 **关于中国文化的问题** 的大模型，包括但不限于**唐诗、宋词、论语**等古籍，还可以让其**翻译文言文**等** ，模型用 [xtuner](https://github.com/InternLM/xtuner) 在 [InternLM2](https://github.com/InternLM/InternLM) 的基础上指令微调而来。
 
 **开源不易，如果本项目帮到大家，可以右上角帮我点个 star~ ⭐⭐ , 您的 star ⭐是我们最大的鼓励，谢谢各位！**  
 
 ## NEWS
 
-- [2024.1] 新增诗词、古籍等知识
+- [2024.1] 新增诗词、古籍等知识微调模型
 - [2024.1] 成语数据集微调模型
 
 ## 介绍
@@ -44,10 +44,13 @@
 
 这就是我们做这个模型的初衷，我们想将中华文化教给大模型，让其能够尽可能掌握中华文化，做到文化输出。
 
-
+Demo 访问地址：
 <!-- 演示 Start -->
 
 <!-- 演示 END -->
+
+模型对比：
+
 
 ## 模型
 
@@ -244,7 +247,7 @@ xtuner train finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_d
 
 ## 部署
 
-### cli 部署 Demo
+### Web 部署 Demo
 
 1. 将 pth 转为 hf 
 
@@ -267,12 +270,12 @@ xtuner convert merge /path/to/internlm-chat-7b \
 ```bash
 # web demo
 python app.py
+```
 
-# 也可以直接使用命令行 cli 的方式进行启动
+<!-- # 也可以直接使用命令行 cli 的方式进行启动
 xtuner chat ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge \
             --prompt-template internlm2_chat \
-            --system-template ancient_chat
-```
+            --system-template ancient_chat -->
 
 ### LMDeploy 
 
