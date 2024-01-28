@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2024.1.28
+# @Author  : HinGwenWong
+
 """This script refers to the dialogue example of streamlit, the interactive
 generation code of chatglm2 and transformers.
 
