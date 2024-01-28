@@ -1,3 +1,42 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2024.1.28
+# @Author  : HinGwenWong
+
+"""本脚本用于生成数据集
+
+数据集链接：
+- 文言文：https://huggingface.co/datasets/RUCAIBox/Erya-dataset/tree/main
+- 古诗：https://github.com/chinese-poetry/chinese-poetry
+
+请根据进行数据集准备:
+
+dataset/
+├── Erya-dataset
+│   ├── dataset
+│   └── stage_2
+├── chinese-poetry
+│   ├── 五代诗词
+│   ├── 元曲
+│   ├── 全唐诗
+│   ├── 四书五经
+│   ├── 宋词
+│   ├── 幽梦影
+│   ├── 御定全唐詩
+│   ├── 曹操诗集
+│   ├── 楚辞
+│   ├── 水墨唐诗
+│   ├── 纳兰性德
+│   ├── 蒙学
+│   ├── 论语
+│   └── 诗经
+├── gen_dataset.py
+└── whoami.jsonl
+
+执行脚本生成：
+`python gen_dataset.py --data-root=./dataset --output=data.jsonl`
+
+"""
 import json
 from pathlib import Path
 import argparse
@@ -253,6 +292,8 @@ if __name__ == "__main__":
         raise FileNotFoundError(f"Can't not found data root {DATA_ROOT}")
 
     SYSTE_STR = "你是一位专业的中文教师。你总能解答用户关于中文的相关知识。"
+    
+    # 文言文白话文数据集
     DATA_ROOT_ERYA = DATA_ROOT.joinpath(r"./Erya-dataset")
     get_erya_data(
         DATA_ROOT_ERYA,
@@ -260,6 +301,7 @@ if __name__ == "__main__":
         json_save_path=DATA_ROOT_ERYA.joinpath("data-erya.jsonl"),
     )
 
+    # 古诗数据集
     DATA_ROOT_POETRY = DATA_ROOT.joinpath(r"./chinese-poetry")
     get_poetry_data(
         DATA_ROOT_POETRY, json_save_path=DATA_ROOT_POETRY.joinpath("data-poetry.jsonl")
@@ -268,8 +310,8 @@ if __name__ == "__main__":
     # merge
     new_json = []
     for json_file in [
-        DATA_ROOT_POETRY.joinpath("data-poetry.jsonl"),
         DATA_ROOT_ERYA.joinpath("data-erya.jsonl"),
+        DATA_ROOT_POETRY.joinpath("data-poetry.jsonl"),
         DATA_ROOT.joinpath("whoami.jsonl")
     ]:
         with open(json_file, "r", encoding="utf-8") as f_json:

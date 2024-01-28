@@ -102,7 +102,26 @@ print(response)
 - [ ] 二十四节气
 - [ ] ...
 
-## 数据集
+## 搭建环境
+
+本项目使用 [xtuner](https://github.com/InternLM/xtuner) 训练，在 [internlm2-chat-7b](https://huggingface.co/internlm/internlm2-chat-7b) 上进行微调
+
+1. clone 本项目
+
+```bash
+git clone https://github.com/PeterH0323/ancient-chat-llm.git
+cd ancient-chat-llm
+```
+
+2. 创建虚拟环境
+
+```bash
+conda env create -f environment.yml
+conda activate ancient-chat-llm
+pip install -r requirements.txt
+```
+
+## 数据集准备
 
 目前使用到的开源数据集有以下几个，我们还使用爬虫等技术进行爬取了其余知识库的数据集：
 
@@ -165,15 +184,11 @@ python gen_dataset.py --data-root=./dataset --output=data.jsonl
     ...
 ```
 
-## 搭建环境
 
-本项目使用 [xtuner](https://github.com/InternLM/xtuner) 训练，在 [internlm2-chat-7b](https://huggingface.co/internlm/internlm2-chat-7b) 上进行微调
 
-```bash
-git clone https://github.com/PeterH0323/ancient-chat-llm.git
-```
+## 训练
 
-训练之前，需要在 `xtuner` 代码中 `xtuner/xtuner/utils/templates.py` 添加 `SYSTEM_TEMPLATE.chinese_old_saying` ：
+1. 训练之前，需要在 `xtuner` 代码中 `xtuner/xtuner/utils/templates.py` 添加 `SYSTEM_TEMPLATE.ancient_chat` ：
 
 ```diff
 SYSTEM_TEMPLATE = ConfigDict(
@@ -203,9 +218,7 @@ SYSTEM_TEMPLATE = ConfigDict(
 )
 ```
 
-## 训练
-
-修改数据集路径，以及模型路径
+2. 将 `./finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_data_e3_finetune.py` 中 数据集路径 和 模型路径 改为您的本地路径
 
 ```diff
 # Model
@@ -220,7 +233,7 @@ max_length = 2048
 pack_to_max_length = True
 ```
 
-使用命令进行训练：
+3. 使用命令进行训练：
 
 ```bash
 xtuner train finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_data_e3_finetune.py --deepspeed deepspeed_zero2
