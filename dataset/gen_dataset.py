@@ -270,7 +270,7 @@ if __name__ == "__main__":
     for json_file in [
         DATA_ROOT_POETRY.joinpath("data-poetry.jsonl"),
         DATA_ROOT_ERYA.joinpath("data-erya.jsonl"),
-        DATA_ROOT.joinpath("myself.jsonl")
+        DATA_ROOT.joinpath("whoami.jsonl")
     ]:
         with open(json_file, "r", encoding="utf-8") as f_json:
             json_data = json.load(f_json)
