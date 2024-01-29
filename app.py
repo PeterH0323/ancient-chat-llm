@@ -185,10 +185,10 @@ def on_btn_click():
 
 @st.cache_resource
 def load_model():
-    model = (AutoModelForCausalLM.from_pretrained('internlm/internlm2-chat-7b',
+    model = (AutoModelForCausalLM.from_pretrained(MODEL_DIR,
                                                   trust_remote_code=True).to(
                                                       torch.bfloat16).cuda())
-    tokenizer = AutoTokenizer.from_pretrained('internlm/internlm2-chat-7b',
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR,
                                               trust_remote_code=True)
     return model, tokenizer
 
@@ -218,7 +218,7 @@ cur_query_prompt = '<|im_start|>user\n{user}<|im_end|>\n\
 
 def combine_history(prompt):
     messages = st.session_state.messages
-    meta_instruction = ('你是一位专业的中文教师。你总能解答用户关于中文的相关知识。')
+    meta_instruction = META_INSTRUCTION
     total_prompt = f"<s><|im_start|>system\n{meta_instruction}<|im_end|>\n"
     for message in messages:
         cur_content = message['content']
@@ -290,4 +290,6 @@ def main():
 
 
 if __name__ == '__main__':
+    MODEL_DIR  = "hingwen/ancient-chat-7b"
+    META_INSTRUCTION = ('你是一位专业的中文教师。你总能解答用户关于中文的相关知识。')
     main()

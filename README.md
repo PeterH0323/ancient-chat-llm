@@ -1,3 +1,18 @@
+<!-- for modelscope yaml info
+---
+language:
+- zh
+tags:
+- ancient-chat-llm
+- internlm2
+frameworks:
+- pytorch
+tasks:
+- text-generation
+license: Apache License 2.0
+---
+-->
+
 # ancient-chat-llm 古语说 —— 一个精通中国文化的大模型
 
 <!-- PROJECT SHIELDS -->
@@ -114,7 +129,7 @@ print(response)
 - [ ] 二十四节气
 - [ ] ...
 
-## 搭建环境
+## 环境搭建
 
 本项目使用 [xtuner](https://github.com/InternLM/xtuner) 训练，在 [internlm2-chat-7b](https://huggingface.co/internlm/internlm2-chat-7b) 上进行微调
 
@@ -261,28 +276,28 @@ xtuner train finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_d
 1. 将 pth 转为 hf 
 
 ```bash
-xtuner convert pth_to_hf ./finetune_configs/internlm_chat_7b/internlm_chat_7b_qlora_custom_data_e3_finetune.py \
-                         ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3.pth \
-                         ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_hf
+xtuner convert pth_to_hf ./finetune_configs/internlm_chat_7b/internlm2_chat_7b_qlora_custom_data_e3_finetune.py \
+                         ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3.pth \
+                         ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_hf
 ```
 
 2. 将微调后的模型和源模型 merge 生成新的模型
 
 ```bash
-xtuner convert merge /path/to/internlm-chat-7b \
-                     ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_hf \
-                     ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge
+export MKL_SERVICE_FORCE_INTEL=1 # 解决 Error: mkl-service + Intel(R) MKL: MKL_THREADING_LAYER=INTEL is incompatible with libgomp.so.1 library.
+xtuner convert merge /path/to/internlm2-chat-7b \
+                     ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_hf \
+                     ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge
 ```
 
 3. 启动 web demo
 
 ```bash
-# web demo
-python app.py
+streamlit run app.py --server.address=0.0.0.0 --server.port 7860
 ```
 
 <!-- # 也可以直接使用命令行 cli 的方式进行启动
-xtuner chat ./work_dirs/internlm_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge \
+xtuner chat ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge \
             --prompt-template internlm2_chat \
             --system-template ancient_chat -->
 
