@@ -149,7 +149,7 @@ cd ancient-chat-llm
 ```bash
 conda env create -f environment.yml
 conda activate ancient-chat-llm
-pip install -r requirements.txt
+pip install -r requirements-raw.txt
 ```
 
 ## 数据集准备

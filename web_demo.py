@@ -185,6 +185,10 @@ def on_btn_click():
 
 @st.cache_resource
 def load_model():
+    
+    if USING_MODELSCOPE:
+        from modelscope import snapshot_download
+        MODEL_DIR = snapshot_download(MODEL_DIR, revision='master')
     model = (AutoModelForCausalLM.from_pretrained(MODEL_DIR,
                                                   trust_remote_code=True).to(
                                                       torch.bfloat16).cuda())
@@ -290,6 +294,11 @@ def main():
 
 
 if __name__ == '__main__':
-    MODEL_DIR  = "hingwen/ancient-chat-7b"
+    
+    USING_MODELSCOPE = True
+    if USING_MODELSCOPE:
+        MODEL_DIR = "HinGwenWoong/ancient-chat-7b"
+    else:
+        MODEL_DIR  = "hingwen/ancient-chat-7b"
     META_INSTRUCTION = ('你是一位专业的中文教师。你总能解答用户关于中文的相关知识。')
     main()
