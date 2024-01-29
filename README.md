@@ -96,23 +96,6 @@ response, history = model.chat(tokenizer, "李白简介", history=history)
 print(response)
 ```
 
-### 从 huggingface 导入
-
-[hingwen/ancient-chat-7b](https://huggingface.co/hingwen/ancient-chat-7b)
-
-```python
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
-tokenizer = AutoTokenizer.from_pretrained("hingwen/ancient-chat-7b", trust_remote_code=True)
-# Set `torch_dtype=torch.float16` to load model in float16, otherwise it will be loaded as float32 and might cause OOM Error.
-model = AutoModelForCausalLM.from_pretrained("hingwen/ancient-chat-7b", device_map="auto", trust_remote_code=True, torch_dtype=torch.float16)
-model = model.eval()
-response, history = model.chat(tokenizer, "你好", history=[])
-print(response)
-response, history = model.chat(tokenizer, "李白简介", history=history)
-print(response)
-```
-
 ## 知识库
 
 - [x] 文言文翻译
