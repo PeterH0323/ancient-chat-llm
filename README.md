@@ -71,7 +71,7 @@ license: Apache License 2.0
 
 ## 演示
 
-Demo 访问地址：
+Demo 访问地址：https://openxlab.org.cn/apps/detail/HinGwenWong/ancient-chat-llm
 
 <p align="center">
     <img src="assets/demo.png" alt="Demo" width="70%">
@@ -307,7 +307,22 @@ xtuner chat ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_
 
 ### LMDeploy 
 
-TODO 
+1. 安装 lmdeploy
+
+```bash
+pip install 'lmdeploy[all]==v0.2.1'
+```
+
+2. 进行 KV int8 量化
+
+```bash
+lmdeploy lite calibrate ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge \
+                        --calib-dataset "c4" \
+                        --calib-samples 128 \
+                        --calib-seqlen 2048 \
+                        --work-dir ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/quant_ancient-chat-7b_output
+
+```
 
 ## TODO
 
