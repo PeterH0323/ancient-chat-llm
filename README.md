@@ -276,7 +276,7 @@ xtuner convert merge /path/to/internlm2-chat-7b \
 3. 启动 web demo
 
 ```bash
-streamlit run app.py --server.address=0.0.0.0 --server.port 7860
+streamlit run web_demo.py --server.address=0.0.0.0 --server.port 7860
 ```
 
 <!-- # 也可以直接使用命令行 cli 的方式进行启动
