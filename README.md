@@ -74,7 +74,7 @@ license: Apache License 2.0
 Demo 访问地址：
 
 <p align="center">
-    <img src="assets/demo.png" alt="Demo" width="30%">
+    <img src="assets/demo.png" alt="Demo" width="70%">
 </p>
 
 模型对比：
