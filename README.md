@@ -85,7 +85,7 @@ Demo 访问地址：https://openxlab.org.cn/apps/detail/HinGwenWong/ancient-chat
 
 | 模型 | 基座 | 数据量 | ModelScope | hugging face |  
 | --- | --- | --- |--- |--- |
-| ancient-chat-7b | interlm2-chat-7b | [ModelScope](https://modelscope.cn/models/HinGwenWoong/ancient-chat-7b) | [hugging face](https://huggingface.co/hingwen/ancient-chat-7b) | 
+| ancient-chat-7b | interlm2-chat-7b | 230013 个单 conversation | [ModelScope](https://modelscope.cn/models/HinGwenWoong/ancient-chat-7b) | [hugging face](https://huggingface.co/hingwen/ancient-chat-7b) |
 
 
 <details>
