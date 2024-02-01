@@ -272,6 +272,12 @@ def get_poetry_data(data_root: Path, json_save_path: Path):
                         }
                     )
 
+    # 将里面可能出现的繁体字转为简体字
+    for qa in qa_list:
+        qa["conversation"][0]["input"] = zhconv.convert(qa["conversation"][0]["input"], "zh-hans")
+        qa["conversation"][0]["output"] = zhconv.convert(qa["conversation"][0]["output"], "zh-hans")
+        qa["conversation"][0]["output"] = qa["conversation"][0]["output"].replace("。。","。").replace("，，","，")
+
     print("Saving")
     with open(json_save_path, "w", encoding="utf-8") as f_output:
         f_output.write(json.dumps(qa_list, ensure_ascii=False, indent=4))

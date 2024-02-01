@@ -49,8 +49,9 @@ license: Apache License 2.0
 
 ## NEWS
 
-- [2024.1] 新增诗词、古籍等知识微调模型
-- [2024.1] 成语数据集微调模型
+- [2024.1.31] 数据清洗，重训
+- [2024.1.28] 新增诗词、古籍等知识微调模型
+- [2024.1.16] 成语数据集微调模型
 
 ## 介绍
 
@@ -77,14 +78,18 @@ Demo 访问地址：https://openxlab.org.cn/apps/detail/HinGwenWong/ancient-chat
     <img src="assets/demo.png" alt="Demo" width="70%">
 </p>
 
-模型对比：
+模型对比：comming soon
 
 
 ## 模型
 
-### 从 ModelScope 导入
+| 模型 | 基座 | 数据量 | ModelScope | hugging face |  
+| --- | --- | --- |--- |--- |
+| ancient-chat-7b | interlm2-chat-7b | [ModelScope](https://modelscope.cn/models/HinGwenWoong/ancient-chat-7b) | [hugging face](https://huggingface.co/hingwen/ancient-chat-7b) | 
 
-[HinGwenWoong/ancient-chat-7b](https://modelscope.cn/models/HinGwenWoong/ancient-chat-7b)
+
+<details>
+<summary> 从 ModelScope 导入</summary>
 
 ```python
 import torch
@@ -100,9 +105,10 @@ response, history = model.chat(tokenizer, "李白简介", history=history)
 print(response)
 ```
 
-### 从 huggingface 导入
+</details>
 
-[hingwen/ancient-chat-7b](https://huggingface.co/hingwen/ancient-chat-7b)
+<details>
+<summary> 从 huggingface 导入 </summary>
 
 ```python
 import torch
@@ -116,6 +122,8 @@ print(response)
 response, history = model.chat(tokenizer, "李白简介", history=history)
 print(response)
 ```
+
+</details>
 
 ## 知识库
 
