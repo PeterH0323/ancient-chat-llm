@@ -83,8 +83,8 @@ Demo 访问地址：https://openxlab.org.cn/apps/detail/HinGwenWong/ancient-chat
 
 ## Model Zoo
 
-| 模型 | 基座 | 数据量 | ModelScope(HF) | Transformers(HF) |  OpenXLab(HF) |
-| --- | --- | --- |--- | --- | --- |
+| 模型                | 基座             | 数据量                   | ModelScope(HF)                                                          | Transformers(HF)                                               | OpenXLab(HF)                                                                                                                                                |
+| ------------------- | ---------------- | ------------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ancient-chat-llm-7b | interlm2-chat-7b | 230013 个单 conversation | [ModelScope](https://modelscope.cn/models/HinGwenWoong/ancient-chat-7b) | [hugging face](https://huggingface.co/hingwen/ancient-chat-7b) | [![Open in OpenXLab](https://cdn-static.openxlab.org.cn/header/openxlab_models.svg)](https://openxlab.org.cn/models/detail/HinGwenWong/ancient-chat-llm-7b) |
 
 
@@ -378,3 +378,13 @@ python run.py --datasets ceval_gen \
 本项目属于个人的一个学习项目，还有很多不足的地方，例如本模型在数据集方面的还没做很精细的调优，还有时候标点符号会错误。
 
 欢迎大家一起讨论，如果大家有数据集，可以在 issue 留言讨论。
+
+## 💕 致谢
+
+- [**xtuner**](https://github.com/InternLM/xtuner)
+
+感谢上海人工智能实验室推出的书生·浦语大模型实战营，为我们的项目提供宝贵的技术指导和强大的算力支持。
+
+## 开源许可证
+
+该项目采用 [Apache License 2.0 开源许可证](https://github.com/PeterH0323/ancient-chat-llm/LICENSE) 同时，请遵守所使用的模型与数据集的许可证。
