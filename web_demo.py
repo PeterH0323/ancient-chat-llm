@@ -341,7 +341,7 @@ def main(model_dir, meta_instruction, using_modelscope=True):
 
 
 if __name__ == "__main__":
-    USING_MODELSCOPE = False
+    USING_MODELSCOPE = True
     if USING_MODELSCOPE:
         MODEL_DIR = "HinGwenWoong/ancient-chat-7b"
     else:
