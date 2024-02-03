@@ -30,10 +30,10 @@ max_length = 2048
 pack_to_max_length = True
 
 # Scheduler & Optimizer
-batch_size = 2 # 8 -> 40G ， 2 -> 18G  # per_device
+batch_size = 4 # 4 -> 27G ， 2 -> 18G  # per_device
 accumulative_counts = 16
 dataloader_num_workers = 0
-max_epochs = 3
+max_epochs = 10 # 3
 optim_type = AdamW
 lr = 2e-4
 betas = (0.9, 0.999)
@@ -42,16 +42,16 @@ max_norm = 1  # grad clip
 warmup_ratio = 0.03
 
 # Evaluate the generation performance during the training
-evaluation_freq = 200
+evaluation_freq = 500
 SYSTEM = SYSTEM_TEMPLATE.ancient_chat
 evaluation_inputs = [
+    "你好",
     '出言不逊出自哪里', 
     '帮我用成语志在四方讲一个故事', 
     '举一反三的反义词是什么', 
     '李白简介', 
     "介绍下《短歌行 其二》", 
     "介绍下姓氏“干”的由来", "帮我翻译成文言文：“虚张声势，却招来了实际的损害，”",
-    "你是谁"
 ]
 
 #######################################################################
