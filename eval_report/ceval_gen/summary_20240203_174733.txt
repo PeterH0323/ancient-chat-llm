@@ -1,0 +1,195 @@
+20240203_174733
+tabulate format
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+dataset                                         version    metric         mode      opencompass.models.huggingface.HuggingFace_upload_models_ancient-chat-7b
+----------------------------------------------  ---------  -------------  ------  --------------------------------------------------------------------------
+ceval-computer_network                          db9ce2     accuracy       gen                                                                          47.37
+ceval-operating_system                          1c2571     accuracy       gen                                                                          47.37
+ceval-computer_architecture                     a74dad     accuracy       gen                                                                          52.38
+ceval-college_programming                       4ca32a     accuracy       gen                                                                          37.84
+ceval-college_physics                           963fa8     accuracy       gen                                                                          36.84
+ceval-college_chemistry                         e78857     accuracy       gen                                                                          29.17
+ceval-advanced_mathematics                      ce03e2     accuracy       gen                                                                          26.32
+ceval-probability_and_statistics                65e812     accuracy       gen                                                                          27.78
+ceval-discrete_mathematics                      e894ae     accuracy       gen                                                                          31.25
+ceval-electrical_engineer                       ae42b9     accuracy       gen                                                                          37.84
+ceval-metrology_engineer                        ee34ea     accuracy       gen                                                                          50
+ceval-high_school_mathematics                   1dc5bf     accuracy       gen                                                                          27.78
+ceval-high_school_physics                       adf25f     accuracy       gen                                                                          31.58
+ceval-high_school_chemistry                     2ed27f     accuracy       gen                                                                          26.32
+ceval-high_school_biology                       8e2b9a     accuracy       gen                                                                          36.84
+ceval-middle_school_mathematics                 bee8d5     accuracy       gen                                                                          21.05
+ceval-middle_school_biology                     86817c     accuracy       gen                                                                          71.43
+ceval-middle_school_physics                     8accf6     accuracy       gen                                                                          63.16
+ceval-middle_school_chemistry                   167a15     accuracy       gen                                                                          95
+ceval-veterinary_medicine                       b4e08d     accuracy       gen                                                                          52.17
+ceval-college_economics                         f3f4e6     accuracy       gen                                                                          41.82
+ceval-business_administration                   c1614e     accuracy       gen                                                                          36.36
+ceval-marxism                                   cf874c     accuracy       gen                                                                          78.95
+ceval-mao_zedong_thought                        51c7a4     accuracy       gen                                                                          66.67
+ceval-education_science                         591fee     accuracy       gen                                                                          68.97
+ceval-teacher_qualification                     4e4ced     accuracy       gen                                                                          79.55
+ceval-high_school_politics                      5c0de2     accuracy       gen                                                                          73.68
+ceval-high_school_geography                     865461     accuracy       gen                                                                          52.63
+ceval-middle_school_politics                    5be3e7     accuracy       gen                                                                          71.43
+ceval-middle_school_geography                   8a63be     accuracy       gen                                                                          66.67
+ceval-modern_chinese_history                    fc01af     accuracy       gen                                                                          78.26
+ceval-ideological_and_moral_cultivation         a2aa4a     accuracy       gen                                                                          73.68
+ceval-logic                                     f5b022     accuracy       gen                                                                          45.45
+ceval-law                                       a110a1     accuracy       gen                                                                          50
+ceval-chinese_language_and_literature           0f8b68     accuracy       gen                                                                          52.17
+ceval-art_studies                               2a1300     accuracy       gen                                                                          75.76
+ceval-professional_tour_guide                   4e673e     accuracy       gen                                                                          75.86
+ceval-legal_professional                        ce8787     accuracy       gen                                                                          43.48
+ceval-high_school_chinese                       315705     accuracy       gen                                                                          47.37
+ceval-high_school_history                       7eb30a     accuracy       gen                                                                          65
+ceval-middle_school_history                     48ab4a     accuracy       gen                                                                          81.82
+ceval-civil_servant                             87d061     accuracy       gen                                                                          53.19
+ceval-sports_science                            70f27b     accuracy       gen                                                                          73.68
+ceval-plant_protection                          8941f9     accuracy       gen                                                                          68.18
+ceval-basic_medicine                            c409d6     accuracy       gen                                                                          63.16
+ceval-clinical_medicine                         49e82d     accuracy       gen                                                                          36.36
+ceval-urban_and_rural_planner                   95b885     accuracy       gen                                                                          58.7
+ceval-accountant                                002837     accuracy       gen                                                                          42.86
+ceval-fire_engineer                             bc23f5     accuracy       gen                                                                          38.71
+ceval-environmental_impact_assessment_engineer  c64e2d     accuracy       gen                                                                          41.94
+ceval-tax_accountant                            3a5e3c     accuracy       gen                                                                          46.94
+ceval-physician                                 6e277d     accuracy       gen                                                                          57.14
+ceval-stem                                      -          naive_average  gen                                                                          42.47
+ceval-social-science                            -          naive_average  gen                                                                          63.67
+ceval-humanities                                -          naive_average  gen                                                                          62.62
+ceval-other                                     -          naive_average  gen                                                                          52.81
+ceval-hard                                      -          naive_average  gen                                                                          29.63
+ceval                                           -          naive_average  gen                                                                          53
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-------------------------------------------------------------------------------------------------------------------------------- THIS IS A DIVIDER --------------------------------------------------------------------------------------------------------------------------------
+
+csv format
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+dataset,version,metric,mode,opencompass.models.huggingface.HuggingFace_upload_models_ancient-chat-7b
+ceval-computer_network,db9ce2,accuracy,gen,47.37
+ceval-operating_system,1c2571,accuracy,gen,47.37
+ceval-computer_architecture,a74dad,accuracy,gen,52.38
+ceval-college_programming,4ca32a,accuracy,gen,37.84
+ceval-college_physics,963fa8,accuracy,gen,36.84
+ceval-college_chemistry,e78857,accuracy,gen,29.17
+ceval-advanced_mathematics,ce03e2,accuracy,gen,26.32
+ceval-probability_and_statistics,65e812,accuracy,gen,27.78
+ceval-discrete_mathematics,e894ae,accuracy,gen,31.25
+ceval-electrical_engineer,ae42b9,accuracy,gen,37.84
+ceval-metrology_engineer,ee34ea,accuracy,gen,50.00
+ceval-high_school_mathematics,1dc5bf,accuracy,gen,27.78
+ceval-high_school_physics,adf25f,accuracy,gen,31.58
+ceval-high_school_chemistry,2ed27f,accuracy,gen,26.32
+ceval-high_school_biology,8e2b9a,accuracy,gen,36.84
+ceval-middle_school_mathematics,bee8d5,accuracy,gen,21.05
+ceval-middle_school_biology,86817c,accuracy,gen,71.43
+ceval-middle_school_physics,8accf6,accuracy,gen,63.16
+ceval-middle_school_chemistry,167a15,accuracy,gen,95.00
+ceval-veterinary_medicine,b4e08d,accuracy,gen,52.17
+ceval-college_economics,f3f4e6,accuracy,gen,41.82
+ceval-business_administration,c1614e,accuracy,gen,36.36
+ceval-marxism,cf874c,accuracy,gen,78.95
+ceval-mao_zedong_thought,51c7a4,accuracy,gen,66.67
+ceval-education_science,591fee,accuracy,gen,68.97
+ceval-teacher_qualification,4e4ced,accuracy,gen,79.55
+ceval-high_school_politics,5c0de2,accuracy,gen,73.68
+ceval-high_school_geography,865461,accuracy,gen,52.63
+ceval-middle_school_politics,5be3e7,accuracy,gen,71.43
+ceval-middle_school_geography,8a63be,accuracy,gen,66.67
+ceval-modern_chinese_history,fc01af,accuracy,gen,78.26
+ceval-ideological_and_moral_cultivation,a2aa4a,accuracy,gen,73.68
+ceval-logic,f5b022,accuracy,gen,45.45
+ceval-law,a110a1,accuracy,gen,50.00
+ceval-chinese_language_and_literature,0f8b68,accuracy,gen,52.17
+ceval-art_studies,2a1300,accuracy,gen,75.76
+ceval-professional_tour_guide,4e673e,accuracy,gen,75.86
+ceval-legal_professional,ce8787,accuracy,gen,43.48
+ceval-high_school_chinese,315705,accuracy,gen,47.37
+ceval-high_school_history,7eb30a,accuracy,gen,65.00
+ceval-middle_school_history,48ab4a,accuracy,gen,81.82
+ceval-civil_servant,87d061,accuracy,gen,53.19
+ceval-sports_science,70f27b,accuracy,gen,73.68
+ceval-plant_protection,8941f9,accuracy,gen,68.18
+ceval-basic_medicine,c409d6,accuracy,gen,63.16
+ceval-clinical_medicine,49e82d,accuracy,gen,36.36
+ceval-urban_and_rural_planner,95b885,accuracy,gen,58.70
+ceval-accountant,002837,accuracy,gen,42.86
+ceval-fire_engineer,bc23f5,accuracy,gen,38.71
+ceval-environmental_impact_assessment_engineer,c64e2d,accuracy,gen,41.94
+ceval-tax_accountant,3a5e3c,accuracy,gen,46.94
+ceval-physician,6e277d,accuracy,gen,57.14
+ceval-stem,-,naive_average,gen,42.47
+ceval-social-science,-,naive_average,gen,63.67
+ceval-humanities,-,naive_average,gen,62.62
+ceval-other,-,naive_average,gen,52.81
+ceval-hard,-,naive_average,gen,29.63
+ceval,-,naive_average,gen,53.00
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+-------------------------------------------------------------------------------------------------------------------------------- THIS IS A DIVIDER --------------------------------------------------------------------------------------------------------------------------------
+
+raw format
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
+Model: opencompass.models.huggingface.HuggingFace_upload_models_ancient-chat-7b
+ceval-computer_network: {'accuracy': 47.368421052631575}
+ceval-operating_system: {'accuracy': 47.368421052631575}
+ceval-computer_architecture: {'accuracy': 52.38095238095239}
+ceval-college_programming: {'accuracy': 37.83783783783784}
+ceval-college_physics: {'accuracy': 36.84210526315789}
+ceval-college_chemistry: {'accuracy': 29.166666666666668}
+ceval-advanced_mathematics: {'accuracy': 26.31578947368421}
+ceval-probability_and_statistics: {'accuracy': 27.77777777777778}
+ceval-discrete_mathematics: {'accuracy': 31.25}
+ceval-electrical_engineer: {'accuracy': 37.83783783783784}
+ceval-metrology_engineer: {'accuracy': 50.0}
+ceval-high_school_mathematics: {'accuracy': 27.77777777777778}
+ceval-high_school_physics: {'accuracy': 31.57894736842105}
+ceval-high_school_chemistry: {'accuracy': 26.31578947368421}
+ceval-high_school_biology: {'accuracy': 36.84210526315789}
+ceval-middle_school_mathematics: {'accuracy': 21.052631578947366}
+ceval-middle_school_biology: {'accuracy': 71.42857142857143}
+ceval-middle_school_physics: {'accuracy': 63.1578947368421}
+ceval-middle_school_chemistry: {'accuracy': 95.0}
+ceval-veterinary_medicine: {'accuracy': 52.17391304347826}
+ceval-college_economics: {'accuracy': 41.81818181818181}
+ceval-business_administration: {'accuracy': 36.36363636363637}
+ceval-marxism: {'accuracy': 78.94736842105263}
+ceval-mao_zedong_thought: {'accuracy': 66.66666666666666}
+ceval-education_science: {'accuracy': 68.96551724137932}
+ceval-teacher_qualification: {'accuracy': 79.54545454545455}
+ceval-high_school_politics: {'accuracy': 73.68421052631578}
+ceval-high_school_geography: {'accuracy': 52.63157894736842}
+ceval-middle_school_politics: {'accuracy': 71.42857142857143}
+ceval-middle_school_geography: {'accuracy': 66.66666666666666}
+ceval-modern_chinese_history: {'accuracy': 78.26086956521739}
+ceval-ideological_and_moral_cultivation: {'accuracy': 73.68421052631578}
+ceval-logic: {'accuracy': 45.45454545454545}
+ceval-law: {'accuracy': 50.0}
+ceval-chinese_language_and_literature: {'accuracy': 52.17391304347826}
+ceval-art_studies: {'accuracy': 75.75757575757575}
+ceval-professional_tour_guide: {'accuracy': 75.86206896551724}
+ceval-legal_professional: {'accuracy': 43.47826086956522}
+ceval-high_school_chinese: {'accuracy': 47.368421052631575}
+ceval-high_school_history: {'accuracy': 65.0}
+ceval-middle_school_history: {'accuracy': 81.81818181818183}
+ceval-civil_servant: {'accuracy': 53.191489361702125}
+ceval-sports_science: {'accuracy': 73.68421052631578}
+ceval-plant_protection: {'accuracy': 68.18181818181817}
+ceval-basic_medicine: {'accuracy': 63.1578947368421}
+ceval-clinical_medicine: {'accuracy': 36.36363636363637}
+ceval-urban_and_rural_planner: {'accuracy': 58.69565217391305}
+ceval-accountant: {'accuracy': 42.857142857142854}
+ceval-fire_engineer: {'accuracy': 38.70967741935484}
+ceval-environmental_impact_assessment_engineer: {'accuracy': 41.935483870967744}
+ceval-tax_accountant: {'accuracy': 46.93877551020408}
+ceval-physician: {'accuracy': 57.14285714285714}
+ceval-stem: {'naive_average': 42.47367200070289}
+ceval-social-science: {'naive_average': 63.67178526252936}
+ceval-humanities: {'naive_average': 62.623458823002586}
+ceval-other: {'naive_average': 52.8053307404322}
+ceval-hard: {'naive_average': 29.628106725146196}
+ceval: {'naive_average': 52.99823034302181}
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$

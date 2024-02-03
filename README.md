@@ -81,9 +81,9 @@ Demo 访问地址：https://openxlab.org.cn/apps/detail/HinGwenWong/ancient-chat
 模型对比：comming soon
 
 
-## 模型
+## Model Zoo
 
-| 模型 | 基座 | 数据量 | ModelScope | hugging face | OpenXLab |
+| 模型 | 基座 | 数据量 | ModelScope(HF) | Transformers(HF) |  OpenXLab(HF) |
 | --- | --- | --- |--- | --- | --- |
 | ancient-chat-llm-7b | interlm2-chat-7b | 230013 个单 conversation | [ModelScope](https://modelscope.cn/models/HinGwenWoong/ancient-chat-7b) | [hugging face](https://huggingface.co/hingwen/ancient-chat-7b) | [![Open in OpenXLab](https://cdn-static.openxlab.org.cn/header/openxlab_models.svg)](https://openxlab.org.cn/models/detail/HinGwenWong/ancient-chat-llm-7b) |
 
@@ -334,12 +334,44 @@ lmdeploy lite auto_awq ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/
 
 ```
 
+## 模型测评
+
+使用的模型测评框架为 [opencompass](https://github.com/open-compass/opencompass)
+
+1. 搭建环境
+
+```bash
+git clone https://github.com/open-compass/opencompass
+cd opencompass
+pip install -e .
+export PYTHONPATH=$(pwd)
+```
+
+2. 启动测评
+
+- CEval
+
+```bash
+python run.py --datasets ceval_gen \
+              --hf-path ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10_merge/ \
+              --tokenizer-path ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10_merge / \
+              --tokenizer-kwargs padding_side='left' truncation='left' trust_remote_code=True \
+              --model-kwargs trust_remote_code=True device_map='auto' \
+              --max-seq-len 2048 \
+              --max-out-len 16 \
+              --batch-size 4 \
+              --num-gpus 1 \
+              --debug
+```
+
+测评结果：[ceval_gen](eval_report/ceval_gen)
+
 ## TODO
 
-- [ ] 模型仍需迭代
+- [x] 量化模型
+- [x] 模型仍需迭代
 - [ ] 数据集需要清洗
 - [ ] 使用其它大模型进行数据集扩充
-- [ ] 量化模型
 
 ## 后记
 
