@@ -35,7 +35,7 @@ license: Apache License 2.0
 <h3 align="center">ancient-chat-llm</h3>
   <p align="center">
     <br />
-    <a href="https://github.com/PeterH0323/ancient-chat-llm/tree/main/demo">查看Demo</a>
+    <a href="https://openxlab.org.cn/apps/detail/HinGwenWong/ancient-chat-llm">查看Demo</a>
     ·
     <a href="https://github.com/PeterH0323/ancient-chat-llm/issues">报告Bug & 提出新特性</a>
   </p>
