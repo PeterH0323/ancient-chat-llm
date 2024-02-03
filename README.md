@@ -49,7 +49,7 @@ license: Apache License 2.0
 
 ## NEWS
 
-- [2024.1.31] 数据清洗，重训
+- [2024.1.31] 数据清洗，发布迭代模型
 - [2024.1.28] 新增诗词、古籍等知识微调模型
 - [2024.1.16] 成语数据集微调模型
 
@@ -206,7 +206,7 @@ python gen_dataset.py --data-root=./dataset --output=data.jsonl
     {
         "conversation": [
             {
-                "system": "你是一位专业的中文教师。你总能解答用户关于中文的相关知识。",
+                "system": "你精通中国文化和中文知识，你总能解答用户关于中国文化和中文的相关知识。",
                 "input": "帮我翻译成文言文：“往西走一里，绕着新寺西边的峰嘴往北走。”",
                 "output": "西一里，转新寺西峰之嘴而北。"
             }
@@ -215,7 +215,7 @@ python gen_dataset.py --data-root=./dataset --output=data.jsonl
     {
         "conversation": [
             {
-                "system": "你是一位专业的中文教师。你总能解答用户关于中文的相关知识。",
+                "system": "你精通中国文化和中文知识，你总能解答用户关于中国文化和中文的相关知识。",
                 "input": "背诵《将进酒》",
                 "output": "君不见黄河之水天上来，奔流到海不复回。\n君不見高堂明鏡悲白髮，朝如青絲暮成雪。\n人生得意須盡歡，莫使金樽空對月。\n天生我材必有用，千金散盡還復來。\n烹羊宰牛且爲樂，會須一飲三百盃。\n岑夫子，丹丘生，將進酒，君莫停。\n與君歌一曲，請君爲我側耳聽。\n鐘鼓饌玉不足貴，但願長醉不願醒。\n古來聖賢皆寂寞，惟有飲者留其名。\n陳王昔時宴平樂，斗酒十千恣讙謔。\n主人何爲言少錢，徑須沽取對君酌。\n五花馬，千金裘，呼兒將出換美酒，與爾同銷萬古愁。"
             }
@@ -253,12 +253,12 @@ SYSTEM_TEMPLATE = ConfigDict(
     lawyer='你现在是一名专业的中国律师，请根据用户的问题给出准确、有理有据的回复。\n',
     medical='如果你是一名医生，请根据患者的描述回答医学问题。\n',
     sql=('If you are an expert in SQL, please generate a good SQL Query '
-         'for Question based on the CREATE TABLE statement.\n'),
-+    ancient_chat="你是一位专业的中文教师。你总能解答用户关于中文的相关知识。\n",
+         'for Question based on the CREATE TABLE statement.\n'),``````
++    ancient_chat="你精通中国文化和中文知识，你总能解答用户关于中国文化和中文的相关知识。\n",
 )
 ```
 
-2. 将 `./finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_data_e3_finetune.py` 中 数据集路径 和 模型路径 改为您的本地路径
+2. 将 `./finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_data_finetune.py` 中 数据集路径 和 模型路径 改为您的本地路径
 
 ```diff
 # Model
@@ -276,7 +276,7 @@ pack_to_max_length = True
 3. 使用命令进行训练：
 
 ```bash
-xtuner train finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_data_e3_finetune.py --deepspeed deepspeed_zero2
+xtuner train finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_data_finetune.py --deepspeed deepspeed_zero2
 ```
 
 注意：如果显存不够了，调小一点 `batch_size` 和 `max_length`，反之还剩很多，调大这两个值
@@ -288,9 +288,9 @@ xtuner train finetune_configs/internlm2_chat_7b/internlm2_chat_7b_qlora_custom_d
 1. 将 pth 转为 hf 
 
 ```bash
-xtuner convert pth_to_hf ./finetune_configs/internlm_chat_7b/internlm2_chat_7b_qlora_custom_data_e3_finetune.py \
-                         ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3.pth \
-                         ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_hf
+xtuner convert pth_to_hf ./finetune_configs/internlm_chat_7b/internlm2_chat_7b_qlora_custom_data_finetune.py \
+                         ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10.pth \
+                         ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10_hf
 ```
 
 2. 将微调后的模型和源模型 merge 生成新的模型
@@ -298,8 +298,8 @@ xtuner convert pth_to_hf ./finetune_configs/internlm_chat_7b/internlm2_chat_7b_q
 ```bash
 export MKL_SERVICE_FORCE_INTEL=1 # 解决 Error: mkl-service + Intel(R) MKL: MKL_THREADING_LAYER=INTEL is incompatible with libgomp.so.1 library.
 xtuner convert merge /path/to/internlm2-chat-7b \
-                     ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_hf \
-                     ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge
+                     ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10_hf \
+                     ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10_merge
 ```
 
 3. 启动 web demo
@@ -309,7 +309,7 @@ streamlit run web_demo.py --server.address=0.0.0.0 --server.port 7860
 ```
 
 <!-- # 也可以直接使用命令行 cli 的方式进行启动
-xtuner chat ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge \
+xtuner chat ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10_merge \
             --prompt-template internlm2_chat \
             --system-template ancient_chat -->
 
@@ -321,14 +321,16 @@ xtuner chat ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_
 pip install 'lmdeploy[all]==v0.2.1'
 ```
 
-2. 进行 KV int8 量化
+1. 进行 4bit 量化
 
 ```bash
-lmdeploy lite calibrate ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/epoch_3_merge \
-                        --calib-dataset "c4" \
-                        --calib-samples 128 \
-                        --calib-seqlen 2048 \
-                        --work-dir ./work_dirs/internlm2_chat_7b_qlora_custom_data_e3_finetune/quant_ancient-chat-7b_output
+lmdeploy lite auto_awq ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10_merge \
+                       --calib-dataset 'c4' \
+                       --calib-samples 128 \
+                       --calib-seqlen 2048 \
+                       --w-bits 4 \
+                       --w-group-size 128 \
+                       --work-dir ./work_dirs/internlm2_chat_7b_qlora_custom_data_finetune/epoch_10_merge-4bit
 
 ```
 

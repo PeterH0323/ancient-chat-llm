@@ -28,8 +28,7 @@ from typing import Callable, List, Optional
 import streamlit as st
 import torch
 from torch import nn
-from transformers.generation.utils import (LogitsProcessorList,
-                                           StoppingCriteriaList)
+from transformers.generation.utils import LogitsProcessorList, StoppingCriteriaList
 from transformers.utils import logging
 
 from transformers import AutoTokenizer, AutoModelForCausalLM  # isort: skip
@@ -55,16 +54,15 @@ def generate_interactive(
     generation_config: Optional[GenerationConfig] = None,
     logits_processor: Optional[LogitsProcessorList] = None,
     stopping_criteria: Optional[StoppingCriteriaList] = None,
-    prefix_allowed_tokens_fn: Optional[Callable[[int, torch.Tensor],
-                                                List[int]]] = None,
+    prefix_allowed_tokens_fn: Optional[Callable[[int, torch.Tensor], List[int]]] = None,
     additional_eos_token_id: Optional[int] = None,
     **kwargs,
 ):
-    inputs = tokenizer([prompt], padding=True, return_tensors='pt')
-    input_length = len(inputs['input_ids'][0])
+    inputs = tokenizer([prompt], padding=True, return_tensors="pt")
+    input_length = len(inputs["input_ids"][0])
     for k, v in inputs.items():
         inputs[k] = v.cuda()
-    input_ids = inputs['input_ids']
+    input_ids = inputs["input_ids"]
     _, input_ids_seq_length = input_ids.shape[0], input_ids.shape[-1]
     if generation_config is None:
         generation_config = model.generation_config
@@ -78,45 +76,50 @@ def generate_interactive(
         eos_token_id = [eos_token_id]
     if additional_eos_token_id is not None:
         eos_token_id.append(additional_eos_token_id)
-    has_default_max_length = kwargs.get(
-        'max_length') is None and generation_config.max_length is not None
+    has_default_max_length = (
+        kwargs.get("max_length") is None and generation_config.max_length is not None
+    )
     if has_default_max_length and generation_config.max_new_tokens is None:
         warnings.warn(
             f"Using 'max_length''s default ({repr(generation_config.max_length)}) \
                 to control the generation length. "
-            'This behaviour is deprecated and will be removed from the \
-                config in v5 of Transformers -- we'
-            ' recommend using `max_new_tokens` to control the maximum \
-                length of the generation.',
+            "This behaviour is deprecated and will be removed from the \
+                config in v5 of Transformers -- we"
+            " recommend using `max_new_tokens` to control the maximum \
+                length of the generation.",
             UserWarning,
         )
     elif generation_config.max_new_tokens is not None:
-        generation_config.max_length = generation_config.max_new_tokens + \
-            input_ids_seq_length
+        generation_config.max_length = (
+            generation_config.max_new_tokens + input_ids_seq_length
+        )
         if not has_default_max_length:
             logger.warn(  # pylint: disable=W4902
                 f"Both 'max_new_tokens' (={generation_config.max_new_tokens}) "
                 f"and 'max_length'(={generation_config.max_length}) seem to "
                 "have been set. 'max_new_tokens' will take precedence. "
-                'Please refer to the documentation for more information. '
-                '(https://huggingface.co/docs/transformers/main/'
-                'en/main_classes/text_generation)',
+                "Please refer to the documentation for more information. "
+                "(https://huggingface.co/docs/transformers/main/"
+                "en/main_classes/text_generation)",
                 UserWarning,
             )
 
     if input_ids_seq_length >= generation_config.max_length:
-        input_ids_string = 'input_ids'
+        input_ids_string = "input_ids"
         logger.warning(
             f"Input length of {input_ids_string} is {input_ids_seq_length}, "
             f"but 'max_length' is set to {generation_config.max_length}. "
-            'This can lead to unexpected behavior. You should consider'
-            " increasing 'max_new_tokens'.")
+            "This can lead to unexpected behavior. You should consider"
+            " increasing 'max_new_tokens'."
+        )
 
     # 2. Set generation parameters if not already defined
-    logits_processor = logits_processor if logits_processor is not None \
-        else LogitsProcessorList()
-    stopping_criteria = stopping_criteria if stopping_criteria is not None \
-        else StoppingCriteriaList()
+    logits_processor = (
+        logits_processor if logits_processor is not None else LogitsProcessorList()
+    )
+    stopping_criteria = (
+        stopping_criteria if stopping_criteria is not None else StoppingCriteriaList()
+    )
 
     logits_processor = model._get_logits_processor(
         generation_config=generation_config,
@@ -127,15 +130,14 @@ def generate_interactive(
     )
 
     stopping_criteria = model._get_stopping_criteria(
-        generation_config=generation_config,
-        stopping_criteria=stopping_criteria)
+        generation_config=generation_config, stopping_criteria=stopping_criteria
+    )
     logits_warper = model._get_logits_warper(generation_config)
 
     unfinished_sequences = input_ids.new(input_ids.shape[0]).fill_(1)
     scores = None
     while True:
-        model_inputs = model.prepare_inputs_for_generation(
-            input_ids, **model_kwargs)
+        model_inputs = model.prepare_inputs_for_generation(input_ids, **model_kwargs)
         # forward pass to get next token
         outputs = model(
             **model_inputs,
@@ -160,9 +162,11 @@ def generate_interactive(
         # update generated ids, model inputs, and length for next step
         input_ids = torch.cat([input_ids, next_tokens[:, None]], dim=-1)
         model_kwargs = model._update_model_kwargs_for_generation(
-            outputs, model_kwargs, is_encoder_decoder=False)
+            outputs, model_kwargs, is_encoder_decoder=False
+        )
         unfinished_sequences = unfinished_sequences.mul(
-            (min(next_tokens != i for i in eos_token_id)).long())
+            (min(next_tokens != i for i in eos_token_id)).long()
+        )
 
         output_token_ids = input_ids[0].cpu().tolist()
         output_token_ids = output_token_ids[input_length:]
@@ -174,130 +178,174 @@ def generate_interactive(
         yield response
         # stop when each sentence is finished
         # or if we exceed the maximum length
-        if unfinished_sequences.max() == 0 or stopping_criteria(
-                input_ids, scores):
+        if unfinished_sequences.max() == 0 or stopping_criteria(input_ids, scores):
             break
 
 
-def on_btn_click():
-    del st.session_state.messages
-
-
+def on_btn_click(*args, **kwargs):
+    if kwargs["info"] == "清除对话历史":
+        del st.session_state.messages
+    else:
+        st.session_state.button_msg = kwargs["info"]
+    
+    
 @st.cache_resource
 def load_model(model_dir, using_modelscope):
-    
     if using_modelscope:
         from modelscope import snapshot_download
-        model_dir = snapshot_download(model_dir, revision='master')
-    model = (AutoModelForCausalLM.from_pretrained(model_dir,
-                                                  trust_remote_code=True).to(
-                                                      torch.bfloat16).cuda())
-    tokenizer = AutoTokenizer.from_pretrained(model_dir,
-                                              trust_remote_code=True)
+
+        model_dir = snapshot_download(model_dir, revision="master")
+    model = (
+        AutoModelForCausalLM.from_pretrained(model_dir, trust_remote_code=True)
+        .to(torch.bfloat16)
+        .cuda()
+    )
+    tokenizer = AutoTokenizer.from_pretrained(model_dir, trust_remote_code=True)
     return model, tokenizer
 
 
 def prepare_generation_config():
     with st.sidebar:
-        max_length = st.slider('Max Length',
-                               min_value=8,
-                               max_value=32768,
-                               value=32768)
-        top_p = st.slider('Top P', 0.0, 1.0, 0.8, step=0.01)
-        temperature = st.slider('Temperature', 0.0, 1.0, 0.7, step=0.01)
-        st.button('Clear Chat History', on_click=on_btn_click)
+        # 标题
+        st.markdown("## 古语说")
+        "[古语说 Github repo](https://github.com/PeterH0323/ancient-chat-llm)"
 
-    generation_config = GenerationConfig(max_length=max_length,
-                                         top_p=top_p,
-                                         temperature=temperature)
+        # 模型配置
+        st.markdown("## 模型配置")
+        max_length = st.slider("Max Length", min_value=8, max_value=32768, value=32768)
+        top_p = st.slider("Top P", 0.0, 1.0, 0.8, step=0.01)
+        temperature = st.slider("Temperature", 0.0, 1.0, 0.7, step=0.01)
+        
+        st.button("清除对话历史", on_click=on_btn_click, kwargs={"info": "清除对话历史"})
+
+        st.markdown("## 例子")
+        #  唐诗
+        st.button("李白简介", on_click=on_btn_click, kwargs={"info": "李白简介"})
+        st.button(
+            "背诵下《将进酒》", on_click=on_btn_click, kwargs={"info": "背诵下《将进酒》"}
+        )
+        st.button(
+            "文言文译成白话文", on_click=on_btn_click, kwargs={"info": "帮我翻译成文言文：“回到寺中，讲定的挑夫来要求加价，我不同意。”"}
+        )
+        st.button(
+            "白话文译成文言文", on_click=on_btn_click, kwargs={"info": "帮我翻译成白话文：“北入山一里，为紫云洞，亦无洞，山前一冈当户环成耳。”"}
+        )
+        st.button(
+            "如虎添翼的解释", on_click=on_btn_click, kwargs={"info": "如虎添翼的解释"}
+        )
+        st.button(
+            "有朋自远方来，不亦乐乎?", on_click=on_btn_click, kwargs={"info": "有朋自远方来，不亦乐乎?"}
+        )
+        st.button(
+            "介绍下姓氏“李”的由来", on_click=on_btn_click, kwargs={"info": "介绍下姓氏“李”的由来"}
+        )
+        st.button(
+            "介绍下《满庭芳》", on_click=on_btn_click, kwargs={"info": "介绍下《满庭芳》"}
+        )
+    generation_config = GenerationConfig(
+        max_length=max_length, top_p=top_p, temperature=temperature
+    )
 
     return generation_config
 
 
-user_prompt = '<|im_start|>user\n{user}<|im_end|>\n'
-robot_prompt = '<|im_start|>assistant\n{robot}<|im_end|>\n'
-cur_query_prompt = '<|im_start|>user\n{user}<|im_end|>\n\
-    <|im_start|>assistant\n'
+user_prompt = "<|im_start|>user\n{user}<|im_end|>\n"
+robot_prompt = "<|im_start|>assistant\n{robot}<|im_end|>\n"
+cur_query_prompt = "<|im_start|>user\n{user}<|im_end|>\n\
+    <|im_start|>assistant\n"
 
 
-def combine_history(prompt, meta_instruction):
+def combine_history(prompt, meta_instruction, with_history=True):
     messages = st.session_state.messages
     total_prompt = f"<s><|im_start|>system\n{meta_instruction}<|im_end|>\n"
-    for message in messages:
-        cur_content = message['content']
-        if message['role'] == 'user':
-            cur_prompt = user_prompt.format(user=cur_content)
-        elif message['role'] == 'robot':
-            cur_prompt = robot_prompt.format(robot=cur_content)
-        else:
-            raise RuntimeError
-        total_prompt += cur_prompt
+    if with_history:
+        for message in messages:
+            cur_content = message["content"]
+            if message["role"] == "user":
+                cur_prompt = user_prompt.format(user=cur_content)
+            elif message["role"] == "robot":
+                cur_prompt = robot_prompt.format(robot=cur_content)
+            else:
+                raise RuntimeError
+            total_prompt += cur_prompt
     total_prompt = total_prompt + cur_query_prompt.format(user=prompt)
     return total_prompt
 
 
 def main(model_dir, meta_instruction, using_modelscope=True):
     # torch.cuda.empty_cache()
-    print('load model begin.')
+    print("load model begin.")
     model, tokenizer = load_model(model_dir, using_modelscope)
-    print('load model end.')
+    print("load model end.")
 
-    user_avator = 'assets/user.png'
-    robot_avator = 'assets/logo.png'
+    user_avator = "/root/LLM_Chinese_Teacher/assets/user.png"
+    robot_avator = "/root/LLM_Chinese_Teacher/assets/logo.png"
 
-    st.title('ancient-chat-llm 古语说')
+    st.title("ancient-chat-llm 古语说")
 
     generation_config = prepare_generation_config()
 
     # Initialize chat history
-    if 'messages' not in st.session_state:
+    if "messages" not in st.session_state:
         st.session_state.messages = []
 
     # Display chat messages from history on app rerun
     for message in st.session_state.messages:
-        with st.chat_message(message['role'], avatar=message.get('avatar')):
-            st.markdown(message['content'])
+        with st.chat_message(message["role"], avatar=message.get("avatar")):
+            st.markdown(message["content"])
+
+    if "button_msg" not in st.session_state:
+        st.session_state.button_msg = "x-x"
+
+    hint_msg = "你好，可以问我任何关于中国文化的事情，例如“介绍下李白”，或者点击侧边栏的例子"
+    if st.session_state.button_msg != "x-x":
+        prompt = st.session_state.button_msg
+        st.session_state.button_msg = "x-x"
+        st.chat_input(hint_msg)
+    else:
+        prompt = st.chat_input(hint_msg)
 
     # Accept user input
-    if prompt := st.chat_input('What is up?'):
+    if prompt:
         # Display user message in chat message container
-        with st.chat_message('user', avatar=user_avator):
+        with st.chat_message("user", avatar=user_avator):
             st.markdown(prompt)
-        real_prompt = combine_history(prompt, meta_instruction)
+        real_prompt = combine_history(prompt, meta_instruction, with_history=False) # 是否加上历史对话记录
+        # print(real_prompt)
         # Add user message to chat history
-        st.session_state.messages.append({
-            'role': 'user',
-            'content': prompt,
-            'avatar': user_avator
-        })
+        st.session_state.messages.append(
+            {"role": "user", "content": prompt, "avatar": user_avator}
+        )
 
-        with st.chat_message('robot', avatar=robot_avator):
+        with st.chat_message("robot", avatar=robot_avator):
             message_placeholder = st.empty()
             for cur_response in generate_interactive(
-                    model=model,
-                    tokenizer=tokenizer,
-                    prompt=real_prompt,
-                    additional_eos_token_id=92542,
-                    **asdict(generation_config),
+                model=model,
+                tokenizer=tokenizer,
+                prompt=real_prompt,
+                additional_eos_token_id=92542,
+                **asdict(generation_config),
             ):
                 # Display robot response in chat message container
-                message_placeholder.markdown(cur_response + '▌')
+                message_placeholder.markdown(cur_response + "▌")
             message_placeholder.markdown(cur_response)
         # Add robot response to chat history
-        st.session_state.messages.append({
-            'role': 'robot',
-            'content': cur_response,  # pylint: disable=undefined-loop-variable
-            'avatar': robot_avator,
-        })
+        st.session_state.messages.append(
+            {
+                "role": "robot",
+                "content": cur_response,  # pylint: disable=undefined-loop-variable
+                "avatar": robot_avator,
+            }
+        )
         torch.cuda.empty_cache()
 
 
-if __name__ == '__main__':
-    
-    USING_MODELSCOPE = True
+if __name__ == "__main__":
+    USING_MODELSCOPE = False
     if USING_MODELSCOPE:
         MODEL_DIR = "HinGwenWoong/ancient-chat-7b"
     else:
-        MODEL_DIR  = "hingwen/ancient-chat-7b"
-    META_INSTRUCTION = ('你是一位专业的中文教师。你总能解答用户关于中文的相关知识。')
+        MODEL_DIR = "hingwen/ancient-chat-7b"
+
+    META_INSTRUCTION = ("你精通中国文化和中文知识，你总能解答用户关于中国文化和中文的相关知识。")
     main(MODEL_DIR, META_INSTRUCTION, USING_MODELSCOPE)
