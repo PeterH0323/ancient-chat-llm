@@ -278,8 +278,8 @@ def main(model_dir, meta_instruction, using_modelscope=True):
     model, tokenizer = load_model(model_dir, using_modelscope)
     print("load model end.")
 
-    user_avator = "/root/LLM_Chinese_Teacher/assets/user.png"
-    robot_avator = "/root/LLM_Chinese_Teacher/assets/logo.png"
+    user_avator = "assets/user.png"
+    robot_avator = "assets/logo.png"
 
     st.title("ancient-chat-llm 古语说")
 
