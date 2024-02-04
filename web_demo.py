@@ -210,38 +210,37 @@ def prepare_generation_config():
         st.markdown("## 古语说")
         "[古语说 Github repo](https://github.com/PeterH0323/ancient-chat-llm)"
 
+        st.markdown("## 例子")
+        st.button("李白简介", on_click=on_btn_click, kwargs={"info": "李白简介"})  #  唐诗
+        st.button(
+            "背诵下《将进酒》", on_click=on_btn_click, kwargs={"info": "背诵下《将进酒》"}
+        )   #  唐诗
+        st.button(
+            "文言文译成白话文", on_click=on_btn_click, kwargs={"info": "帮我翻译成文言文：“回到寺中，讲定的挑夫来要求加价，我不同意。”"}
+        )  #  文言文
+        st.button(
+            "白话文译成文言文", on_click=on_btn_click, kwargs={"info": "帮我翻译成白话文：“北入山一里，为紫云洞，亦无洞，山前一冈当户环成耳。”"}
+        )  #  文言文
+        st.button(
+            "如虎添翼的解释", on_click=on_btn_click, kwargs={"info": "如虎添翼的解释"}
+        )  #  成语
+        st.button(
+            "有朋自远方来，不亦乐乎?", on_click=on_btn_click, kwargs={"info": "有朋自远方来，不亦乐乎?"}
+        )  #  论语
+        st.button(
+            "介绍下姓氏“李”的由来", on_click=on_btn_click, kwargs={"info": "介绍下姓氏“李”的由来"}
+        ) # 百家姓
+        st.button(
+            "介绍下《满庭芳》", on_click=on_btn_click, kwargs={"info": "介绍下《满庭芳》"}
+        ) # 古诗赏析
+        
         # 模型配置
-        st.markdown("## 模型配置")
+        st.button("清除对话历史", on_click=on_btn_click, kwargs={"info": "清除对话历史"})
         max_length = st.slider("Max Length", min_value=8, max_value=32768, value=32768)
         top_p = st.slider("Top P", 0.0, 1.0, 0.8, step=0.01)
         temperature = st.slider("Temperature", 0.0, 1.0, 0.7, step=0.01)
-        
-        st.button("清除对话历史", on_click=on_btn_click, kwargs={"info": "清除对话历史"})
+        st.markdown("## 模型配置")
 
-        st.markdown("## 例子")
-        #  唐诗
-        st.button("李白简介", on_click=on_btn_click, kwargs={"info": "李白简介"})
-        st.button(
-            "背诵下《将进酒》", on_click=on_btn_click, kwargs={"info": "背诵下《将进酒》"}
-        )
-        st.button(
-            "文言文译成白话文", on_click=on_btn_click, kwargs={"info": "帮我翻译成文言文：“回到寺中，讲定的挑夫来要求加价，我不同意。”"}
-        )
-        st.button(
-            "白话文译成文言文", on_click=on_btn_click, kwargs={"info": "帮我翻译成白话文：“北入山一里，为紫云洞，亦无洞，山前一冈当户环成耳。”"}
-        )
-        st.button(
-            "如虎添翼的解释", on_click=on_btn_click, kwargs={"info": "如虎添翼的解释"}
-        )
-        st.button(
-            "有朋自远方来，不亦乐乎?", on_click=on_btn_click, kwargs={"info": "有朋自远方来，不亦乐乎?"}
-        )
-        st.button(
-            "介绍下姓氏“李”的由来", on_click=on_btn_click, kwargs={"info": "介绍下姓氏“李”的由来"}
-        )
-        st.button(
-            "介绍下《满庭芳》", on_click=on_btn_click, kwargs={"info": "介绍下《满庭芳》"}
-        )
     generation_config = GenerationConfig(
         max_length=max_length, top_p=top_p, temperature=temperature
     )
